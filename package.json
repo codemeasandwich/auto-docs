@@ -1,0 +1,22 @@
+{
+  "name": "auto-docs",
+  "version": "0.0.0",
+  "description": "A screenshot & markdown generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codemeasandwich/auto-docs.git"
+  },
+  "keywords": [
+    "manual"
+  ],
+  "author": "Bria Shannon(https://github.com/codemeasandwich)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codemeasandwich/auto-docs/issues"
+  },
+  "homepage": "https://github.com/codemeasandwich/auto-docs#readme"
+}
