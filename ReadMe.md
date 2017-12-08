@@ -38,3 +38,26 @@ docsify serve docs
 * code: add a block of code to document (source,[type]) ***type** of optional*
 * pageBreak: add a link break to document () ~ No arguments
 * title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*
+
+
+## config file
+
+From with the manual folder you should place a **config.json** file
+
+Example:
+
+```json
+{
+  "server":"http://localhost:3000/myapp/",
+  "only":["1-Welcome","1-How to log in"],
+  "login":{
+    "user":["#username", "admin"],
+    "pass":["#password", "admin"],
+    "url":"login.html",
+    "button":"#loginButton"
+  }
+}
+```
+* server: the path to your server
+* only: An array of file steps to the page you want to regenerate  *optional!*
+* login: login credentials to use

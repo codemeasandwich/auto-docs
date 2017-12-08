@@ -1,10 +1,14 @@
 import { Selector } from 'testcafe';
 import { exec } from 'child_process';
-require('./bootstrap');
+const setup = require('./bootstrap');
 
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
-console.log(_dirname)
-const config     = require(_dirname+'/manual/config.json');
+const config = require(_dirname+'/manual/config.json');
+
+if(!config.only){
+  setup.remove()
+}
+
 const fs     = require('fs');
 const loader = require('./loader');
 
@@ -63,16 +67,22 @@ function done(){
     });
 
     const sideItems = Object.keys(mds)
+    if(!config.only){
+
 
     mds.README = mds[sideItems[0]]
     sideItems[0] = "README"
-
+}
     sideItems.forEach((pageName, i) => {
       fs.writeFile(`./docs/${pageName.replace(/⮕\d/,"")}.md`,
                    mds[pageName],
                    err => err ? console.error(err)
                               : console.log("The file was saved!", `./docs/${pageName.replace(/⮕\d/,"")}.md`));
     }) // END sideItems.forEach
+
+if(config.only){
+  return
+}
 
     sideItems.shift()
 
@@ -132,6 +142,17 @@ const manualClean = manual.map(page=>{
 let taskCounter = 0
 
 manualClean.forEach(async (page, index, {length}) =>{
+
+    if(config.only){
+      if(config.only[0] === page.nav.pageName
+        || (config.only[0] === page.nav.heading
+          && config.only[1] === page.nav.pageName )){
+            length = 1
+      } else {
+        return
+      }
+
+    }
 
 //console.log(" ++++ ",page)
   if(page.url){
