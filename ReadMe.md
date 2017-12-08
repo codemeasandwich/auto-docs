@@ -20,3 +20,21 @@ To run document server
 ```
 docsify serve docs
 ```
+
+# Api
+
+### brower commands
+
+* navigateTo: go to a given url - (url)
+* typeText: enter text into an input - (selecter,text)
+* click: click on an element - (selecter)
+
+### document commands
+
+* description: add basic text to document - (text)
+* screenshot: capture the screen and add to document - (screenshot_name)
+* link: add a link to document (title,url)
+* img: add a image to document (title,url)
+* code: add a block of code to document (source,[type]) ***type** of optional*
+* pageBreak: add a link break to document () ~ No arguments
+* title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*
