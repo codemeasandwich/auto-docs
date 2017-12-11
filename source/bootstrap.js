@@ -13,7 +13,7 @@ module.exports = {
     })
   });
 
-
+/*
   fs.readdir('./docs/pics', (err, files)=>{
     files.forEach(file=>{
         if(file.endsWith("png")){
@@ -22,7 +22,7 @@ module.exports = {
           fs.unlinkSync(path);
         }
     })
-  });
+  });*/
 
 }
 }

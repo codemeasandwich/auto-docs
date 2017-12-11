@@ -4,6 +4,7 @@ const setup = require('./bootstrap');
 
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
 const config = require(_dirname+'/manual/config.json');
+const diffs = [];
 
 if(!config.only){
   setup.remove()
@@ -52,7 +53,12 @@ function headerMD(nav){
 
 
 function done(){
-
+  if(diffs.length){
+    console.log()
+    console.info("ERROR - screenshot Diff !!! ^︵^")
+    diffs.forEach(({fileName,path})=>console.error(` ✘ ${fileName}`,path))
+    console.log()
+  }
     // Copy images to docs
     exec(`cp -r ${_dirname}/manual/pics  ${_dirname}/docs`, (err, stdout, stderr) => {
       if (err) {
@@ -173,6 +179,39 @@ manualClean.forEach(async (page, index, {length}) =>{
         for(const task of commands){
 
           if(task.run){
+            if("takeScreenshot"===task.type && task.diff){
+
+              await t[task.type](task.value+"_new").then(path2new => {
+
+                const path2old = path2new.replace("_new","")
+
+                 if (!fs.existsSync(path2old)) {
+
+                   fs.rename(path2new, path2old);
+                 } else
+                    fs.readFile(path2new, (err, dataFromNew) => {
+                      if (err) throw err;
+
+                    fs.readFile(path2old, (err, dataFromOld) => {
+                      if (err) throw err;
+
+                      if(dataFromNew.toString("binary") === dataFromOld.toString("binary")){
+                        fs.unlink(path2new);
+                      } else {
+                        console.log("path2old",path2old)
+                        console.log("path2new",path2new)
+                        console.log("task",task)
+                      //  console.log("page",page)
+                        fs.rename(path2old, path2new.replace("_new","_diff"));
+                        fs.rename(path2new, path2old);
+                        diffs.push({fileName:task.value,path:page.nav})
+                      }
+                    });
+
+                  });
+              })
+            }
+            else
             if(task.selecter)
             await t[task.type](task.selecter,task.value)
             else

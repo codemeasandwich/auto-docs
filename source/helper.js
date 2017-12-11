@@ -26,7 +26,7 @@ ${txt}
     return this
   }
 
-  this.screenshot = function(name) {
+  this.screenshot = function(name,diff=true) {
       name = name.replace(/ /g,"_");
       commands.push({
         type:"wait", run:true, value:1200 // wait for animations
@@ -37,7 +37,7 @@ ${txt}
 `
       })
       commands.push({
-        type:"takeScreenshot", run:true, value:name
+        type:"takeScreenshot", run:true, value:name, diff
       })
       return this
   }

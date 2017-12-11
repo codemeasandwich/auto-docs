@@ -1,22 +1,51 @@
 {
-  "name": "auto-docs",
-  "version": "0.0.0",
-  "description": "A screenshot & markdown generator",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_from": "auto-docs",
+  "_id": "auto-docs@0.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-Yn0P0kkuDHuJhKQ8j55hwY1NR0E=",
+  "_location": "/auto-docs",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "auto-docs",
+    "name": "auto-docs",
+    "escapedName": "auto-docs",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/auto-docs/-/auto-docs-0.0.0.tgz",
+  "_shasum": "627d0fd2492e0c7b8984a43c8f9e61c18d4d4741",
+  "_spec": "auto-docs",
+  "_where": "/home/brian/www/auto-docs",
+  "author": {
+    "name": "Bria Shannon",
+    "url": "https://github.com/codemeasandwich"
+  },
+  "bugs": {
+    "url": "https://github.com/codemeasandwich/auto-docs/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A screenshot & markdown generator",
+  "homepage": "https://github.com/codemeasandwich/auto-docs#readme",
+  "keywords": [
+    "manual"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "auto-docs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemeasandwich/auto-docs.git"
   },
-  "keywords": [
-    "manual"
-  ],
-  "author": "Bria Shannon(https://github.com/codemeasandwich)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/codemeasandwich/auto-docs/issues"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/codemeasandwich/auto-docs#readme"
+  "version": "0.0.0"
 }
