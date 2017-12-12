@@ -1,3 +1,7 @@
+
+const _dirname = __dirname.split('/').slice(0,-3).join('/')
+const config = require(_dirname+'/manual/config.json');
+
 function helper(){
 
   const commands = []
@@ -28,8 +32,9 @@ ${txt}
 
   this.screenshot = function(name,diff=true) {
       name = name.replace(/ /g,"_");
+      if(config.waitBeforeScreenShot)
       commands.push({
-        type:"wait", run:true, value:1200 // wait for animations
+        type:"wait", run:true, value:config.waitBeforeScreenShot // wait for animations
       })
       commands.push({
         type:"saveScreenshot", run:false, value:`
@@ -46,6 +51,19 @@ ${txt}
       commands.push({
         type:"typeText", run:true, value:inputText, selecter:selecter
       })
+      return this
+  }
+
+  this.youtube = function(id,start){
+      let url = `https://youtu.be/${id}`
+      if(start)
+        url += `?t=${start}s`
+
+      commands.push({
+        type:"videoLink", run:false, value:`
+[![video](https://img.youtube.com/vi/${id}/maxresdefault.jpg)](${url})
+![videobutton](/pics/playbutton.png)
+` })
       return this
   }
 
