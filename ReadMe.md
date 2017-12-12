@@ -41,7 +41,9 @@ docsify serve docs
 * youtube: A thumbnail link to a video (video_id,[start from X sec]) ***start** of optional*
     * You will need a "playbutton.png" in your "pics" folder
 
-#### youtube button placement
+<details><summary>youtube button placement</summary><br>
+
+Add this CSS
 ```
 <style>
 p{
@@ -57,6 +59,8 @@ img[alt='videobutton']{
 }
 </style>
 ```
+   
+</details>
 
 ## config file
 
