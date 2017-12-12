@@ -40,8 +40,9 @@ docsify serve docs
 * title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*
 * youtube: A thumbnail link to a video (video_id,[start from X sec]) ***start** of optional*
     * You will need a "playbutton.png" in your "pics" folder
+    * You will also need the CSS to place the button
 
-<details><summary>youtube button placement</summary><br>
+<details><summary>CSS: youtube button placement</summary><br>
 
 Add this CSS
 ```
