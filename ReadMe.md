@@ -75,18 +75,25 @@ window.$docsify = {
 
         if(html.includes("youtube")){
 
-            const elemA = $(html).find("img[src*='youtube']").parent()
-            const link  = elemA.attr("href")
-            const id    = link.split("/").pop().split("?")[0]
+            $(html).find("img[src*='youtube']").parent().toArray()
+                                                        .map(elem => $(elem))
+                                                        .forEach( elemA =>{
 
-            const elemToReplace = elemA.parent().html().replace(new RegExp(" data-origin=", "g"),"data-origin=")
+              const link  = elemA.attr("href")
+              const [id ,time]   = link.split("/").pop().split("?")
 
-            const newElem = `<iframe width="100%" height="433" src="https://www.youtube.com/embed/${id}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>`
+              const start = time ? time.match(/\d+/)[0] : 0
 
-            next(html.replace(elemToReplace,newElem))
-        } else {
-          next(html)
+              const elemToReplace = elemA.parent().html().replace(new RegExp(" data-origin=", "g"),"data-origin=")
+
+              const newElem = `<iframe width="100%" height="433" src="https://www.youtube.com/embed/${id}?start=${start}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>`
+              html = html.replace(elemToReplace,newElem)
+
+            } )
+
         }
+        next(html)
+
       })
    }
  ]
