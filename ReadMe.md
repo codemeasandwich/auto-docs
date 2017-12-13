@@ -32,7 +32,7 @@ docsify serve docs
 ### document commands
 
 * description: Add basic text to document - (text)
-* screenshot: Capture the screen and add to document - (screenshot_name)
+* screenshot: Capture the screen and add to document - (screenshot_name,[diff]) ***diff** defult to `true`* check if the screen has chacked
 * link: Add a link to document (title,url)
 * img: Add a image to document (title,url)
 * code: Add a block of code to document (source,[type]) ***type** of optional*
