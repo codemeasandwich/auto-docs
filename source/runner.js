@@ -186,14 +186,17 @@ manualClean.forEach(async (page, index, {length}) =>{
                 const path2old = path2new.replace("_new","")
 
                  if (!fs.existsSync(path2old)) {
-
+                   console.log(path2new, path2old)
                    fs.rename(path2new, path2old);
-                 } else
-                    fs.readFile(path2new, (err, dataFromNew) => {
-                      if (err) throw err;
+                 } else{
+                    const dataFromNew = fs.readFileSync(path2new)//, (err, dataFromNew) => {
+                    //  if (err) throw err;
 
-                    fs.readFile(path2old, (err, dataFromOld) => {
-                      if (err) throw err;
+                    const dataFromOld = fs.readFileSync(path2old)//, (err, dataFromOld) => {
+                    //  if (err) throw err;
+
+                      console.log("dataFromOld",!!dataFromOld,path2new)
+                      console.log("dataFromNew",!!dataFromNew,path2old)
 
                       if(dataFromNew.toString("binary") === dataFromOld.toString("binary")){
                         fs.unlink(path2new);
@@ -202,13 +205,16 @@ manualClean.forEach(async (page, index, {length}) =>{
                         console.log("path2new",path2new)
                         console.log("task",task)
                       //  console.log("page",page)
+
+                        console.log(path2old, path2new.replace("_new","_diff"))
                         fs.rename(path2old, path2new.replace("_new","_diff"));
+                        console.log(path2new, path2old)
                         fs.rename(path2new, path2old);
                         diffs.push({fileName:task.value,path:page.nav})
                       }
-                    });
-
-                  });
+                  //  });
+                  }
+                //  });
               })
             }
             else
