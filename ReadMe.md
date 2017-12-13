@@ -60,7 +60,43 @@ img[alt='videobutton']{
 }
 </style>
 ```
-   
+
+</details>
+
+<details><summary>JS: embed youtube video</summary><br>
+
+Add this index.html
+```JS
+window.$docsify = {
+
+  plugins: [
+   function (hook, vm) {
+      hook.afterEach(function(html, next) {
+
+        if(html.includes("youtube")){
+
+            const elemA = $(html).find("img[src*='youtube']").parent()
+            const link  = elemA.attr("href")
+            const id    = link.split("/").pop().split("?")[0]
+
+            const elemToReplace = elemA.parent().html().replace(new RegExp(" data-origin=", "g"),"data-origin=")
+
+            const newElem = `<iframe width="100%" height="433" src="https://www.youtube.com/embed/${id}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>`
+
+            next(html.replace(elemToReplace,newElem))
+        } else {
+          next(html)
+        }
+      })
+   }
+ ]
+
+// ...
+
+}
+
+```
+
 </details>
 
 ## config file
