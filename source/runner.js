@@ -1,6 +1,7 @@
 import { Selector } from 'testcafe';
 import { exec } from 'child_process';
-const setup = require('./bootstrap');
+import jsonStringify from 'json-pretty';
+import setup from './bootstrap';
 
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
 const config = require(_dirname+'/manual/config.json');
@@ -52,7 +53,14 @@ function headerMD(nav){
 }
 
 
-function done(){
+function done(translated){
+
+  if(translated){
+    for(const lang in translated){
+      fs.writeFile(`{_dirname}/manual/${lang}.json`,jsonStringify(translated[lang]),()=>{})
+    }
+  }
+
   if(diffs.length){
     console.log()
     console.info("ERROR - screenshot Diff !!! ^︵^")
@@ -86,9 +94,9 @@ function done(){
                               : console.log("The file was saved!", `./docs/${pageName.replace(/⮕\d/,"")}.md`));
     }) // END sideItems.forEach
 
-if(config.only){
-  return
-}
+    if(config.only){
+      return
+    }
 
     sideItems.shift()
 
@@ -135,7 +143,7 @@ groupArray.forEach(({ groupsName, groupName })=>{
 
 
 const manualClean = manual.map(page=>{
-  const aHelper = new helper;
+  const aHelper = new helper(page._.nav.heading,page._.nav.pageName);
   page(function createPage( fillCommandArray, url ){
     aHelper.header("")
     fillCommandArray();
@@ -164,6 +172,7 @@ manualClean.forEach(async (page, index, {length}) =>{
   if(page.url){
     let url = config.server + config.login.url, commands = page.commands
 
+
       if(page.url !== config.login.url){
         const aHelper = new helper;
         aHelper.typeText(config.login.user[0], config.login.user[1])
@@ -180,7 +189,7 @@ manualClean.forEach(async (page, index, {length}) =>{
 
           if(task.run){
             if("takeScreenshot"===task.type && task.diff){
-
+//console.log(task)
               await t[task.type](task.value+"_new").then(path2new => {
 
                 const path2old = path2new.replace("_new","")
@@ -195,16 +204,16 @@ manualClean.forEach(async (page, index, {length}) =>{
                     const dataFromOld = fs.readFileSync(path2old)//, (err, dataFromOld) => {
                     //  if (err) throw err;
 
-                      console.log("dataFromOld",!!dataFromOld,path2new)
-                      console.log("dataFromNew",!!dataFromNew,path2old)
+                      //console.log("dataFromOld",!!dataFromOld,path2new)
+                      //console.log("dataFromNew",!!dataFromNew,path2old)
 
                       if(dataFromNew.toString("binary") === dataFromOld.toString("binary")){
                         fs.unlink(path2new);
                       } else {
-                        console.log("path2old",path2old)
-                        console.log("path2new",path2new)
-                        console.log("task",task)
-                      //  console.log("page",page)
+                        //console.log("path2old",path2old)
+                        //console.log("path2new",path2new)
+                        //console.log("task",task)
+                      //  //console.log("page",page)
 
                         console.log(path2old, path2new.replace("_new","_diff"))
                         fs.rename(path2old, path2new.replace("_new","_diff"));
@@ -225,10 +234,15 @@ manualClean.forEach(async (page, index, {length}) =>{
           }else {
             nonTest(task,index,page.nav)
           }
-        }
 
+        }
+    /*    console.log()
+        console.log(" ** ")
+        console.log(JSON.stringify(page.translated))
+        console.log(" ** ")
+        console.log()*/
         taskCounter++
-        if(taskCounter === length) done()
+        if(taskCounter === length) done(page.translated)
 
       })
   } else {

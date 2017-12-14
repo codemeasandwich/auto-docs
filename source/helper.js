@@ -1,8 +1,20 @@
-
+const fs = require('fs');
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
 const config = require(_dirname+'/manual/config.json');
 
-function helper(){
+const supportedLangs = config.lang || []
+
+const translated = supportedLangs.reduce((supported,lang)=>{
+    const path = _dirname+'/manual/'+lang+'.json'
+    if (fs.existsSync(path)) {
+       supported[lang] = require(path)
+    } else {
+      supported[lang] = {}
+    }
+    return supported
+},{})
+
+function helper(groupName,pageName=undefined,language = "fr"){
 
   const commands = []
 
@@ -117,8 +129,63 @@ ${"```"}
     return this
   }
 
+  this.lang = (text,...values)=>{
+
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+        console.log(0,text)
+    console.log(1,language,2,groupName,3,translated[language][groupName])
+
+     if(!Array.isArray(text)){
+       text = [text]
+     }
+    //language = "fr"
+    translated[language][groupName] = translated[language][groupName] || {}
+    if(pageName){
+      translated[language][groupName][pageName] = translated[language][groupName][pageName] || {}
+    }
+    const pageContent = (pageName) ? translated[language][groupName][pageName] : translated[language][groupName]
+  console.log(111,pageContent)
+    //if(language)
+    const key = text.reduce((txt, value, index)=>{
+      return txt+`${value} ${index < values.length ? `#${index}!`:""} `
+    },"").trim()
+
+    console.log(" >>> KEY ",key)
+
+    let words = text, valueOrder = Array.from(Array(values.length).keys())
+
+    if(pageContent[key]){
+      const output = pageContent[key]
+      .split(/\s{1}#([0-9]+)!\s{1}/g)
+      .reduce( (output, val, index) => {
+          output[index % 2 === 0 ? "words":"values"].push(val)
+          return output
+      } , {words:[],values:[]} )
+      words      = output.words;
+      valueOrder = output.values;
+    } else {
+      pageContent[key] = key
+    }
+  console.log(words)
+console.log(valueOrder)
+  //  if(Array.isArray(text)){
+      text = words.reduce((txt, value, index)=>{
+        return txt + value + (values[valueOrder[index]] ?  values[valueOrder[index]] : "")
+      },"")
+    //}
+
+    return text
+  }
+
+
   this._ = {
-    commands : commands
+    commands,
+    translated
   }
 }
 
