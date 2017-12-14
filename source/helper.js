@@ -2,7 +2,7 @@ const fs = require('fs');
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
 const config = require(_dirname+'/manual/config.json');
 
-const supportedLangs = config.lang || []
+const supportedLangs = config.lang && [config.lang] || []
 
 const translated = supportedLangs.reduce((supported,lang)=>{
     const path = _dirname+'/manual/'+lang+'.json'
@@ -14,7 +14,7 @@ const translated = supportedLangs.reduce((supported,lang)=>{
     return supported
 },{})
 
-function helper(groupName,pageName=undefined,language = "es"){
+function helper(groupName,pageName=undefined,language="?"){
 
   const commands = []
 
@@ -135,6 +135,7 @@ ${"```"}
        text = [text]
      }
     //language = "fr"
+    translated[language] = translated[language] || {}
     translated[language][groupName] = translated[language][groupName] || {}
     if(pageName){
       translated[language][groupName][pageName] = translated[language][groupName][pageName] || {}

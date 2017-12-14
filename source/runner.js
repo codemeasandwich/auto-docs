@@ -55,7 +55,7 @@ function headerMD(nav){
 
 function done(translated){
 
-  if(translated){
+  if(translated && config.lang){
     for(const lang in translated){
       fs.writeFile(`${_dirname}/manual/${lang}.json`,jsonStringify(translated[lang]).replace(/": "/g,'":\n      "').replace(/",/g,'",\n'),()=>{})
     }
@@ -143,7 +143,7 @@ groupArray.forEach(({ groupsName, groupName })=>{
 
 
 const manualClean = manual.map(page=>{
-  const aHelper = new helper(page._.nav.heading,page._.nav.pageName);
+  const aHelper = new helper(page._.nav.heading,page._.nav.pageName,config.lang);
   page(function createPage( fillCommandArray, url ){
     aHelper.header("")
     fillCommandArray();
