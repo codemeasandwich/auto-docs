@@ -35,6 +35,7 @@ docsify serve docs
 * screenshot: Capture the screen and add to document - (screenshot_name,[diff]) ***diff** defult to `true`* check if the screen has chacked
 * link: Add a link to document (title,url)
 * img: Add a image to document (title,url)
+* lang: apply translation from ##.json `` lang`message` ``
 * code: Add a block of code to document (source,[type]) ***type** of optional*
 * pageBreak: Add a link break to document () ~ No arguments
 * title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*

@@ -14,7 +14,7 @@ const translated = supportedLangs.reduce((supported,lang)=>{
     return supported
 },{})
 
-function helper(groupName,pageName=undefined,language = "fr"){
+function helper(groupName,pageName=undefined,language = "es"){
 
   const commands = []
 
@@ -131,15 +131,6 @@ ${"```"}
 
   this.lang = (text,...values)=>{
 
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-    console.log()
-        console.log(0,text)
-    console.log(1,language,2,groupName,3,translated[language][groupName])
-
      if(!Array.isArray(text)){
        text = [text]
      }
@@ -149,13 +140,12 @@ ${"```"}
       translated[language][groupName][pageName] = translated[language][groupName][pageName] || {}
     }
     const pageContent = (pageName) ? translated[language][groupName][pageName] : translated[language][groupName]
-  console.log(111,pageContent)
+
+
     //if(language)
     const key = text.reduce((txt, value, index)=>{
       return txt+`${value} ${index < values.length ? `#${index}!`:""} `
     },"").trim()
-
-    console.log(" >>> KEY ",key)
 
     let words = text, valueOrder = Array.from(Array(values.length).keys())
 
@@ -171,8 +161,7 @@ ${"```"}
     } else {
       pageContent[key] = key
     }
-  console.log(words)
-console.log(valueOrder)
+
   //  if(Array.isArray(text)){
       text = words.reduce((txt, value, index)=>{
         return txt + value + (values[valueOrder[index]] ?  values[valueOrder[index]] : "")

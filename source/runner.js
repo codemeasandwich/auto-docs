@@ -57,7 +57,7 @@ function done(translated){
 
   if(translated){
     for(const lang in translated){
-      fs.writeFile(`{_dirname}/manual/${lang}.json`,jsonStringify(translated[lang]),()=>{})
+      fs.writeFile(`${_dirname}/manual/${lang}.json`,jsonStringify(translated[lang]).replace(/": "/g,'":\n      "').replace(/",/g,'",\n'),()=>{})
     }
   }
 
