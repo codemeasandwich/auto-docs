@@ -1,0 +1,16 @@
+{
+  "name": "auto-docs example",
+  "version": "1.0.0",
+  "description": "An example of using auto-docs an a project",
+  "main": "index.js",
+  "scripts": {
+    "start": "testcafe \"chrome:headless --kiosk --incognito --force-device-scale-factor=1.5\" node_modules/auto-docs/ -s docs/pics",
+    "serve": "docsify serve docs"
+  },
+  "author": "Brian Shannon (https://www.npmjs.com/~codemeasandwich)",
+  "dependencies": {
+    "auto-docs": "0.1.1",
+    "docsify": "^4.5.5",
+    "json-pretty": "0.0.1"
+  }
+}

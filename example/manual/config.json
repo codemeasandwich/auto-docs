@@ -1,0 +1,9 @@
+{
+  "server":"https://github.com/codemeasandwich/",
+  "login":{
+    "user":["#loginusername", "admin"],
+    "pass":["#loginpassword", "pass"],
+    "url":"login.html",
+    "button":".card-content-login"
+  },
+}
