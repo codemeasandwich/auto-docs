@@ -36,6 +36,10 @@ docsify serve docs
 * link: Add a link to document (title,url)
 * img: Add a image to document (title,url)
 * lang: apply translation from ##.json `` lang`message` ``
+    * Injects new text into language json file if new/missing
+    * generating of language json file if missing
+    * With value passion recording
+        * language that use recording : *Arabic, Amharic, Arabic, Azerbaijani, Bangla, Burmese, Chinese, Galician, Georgian, Gujarati, Hindi, Japanese, Kannada, Kazakh, Korean, Kyrgyz, Latin, Malayalam, Marathi, Persian, Punjabi, Sindhi, Sinhala, Tamil, Telugu, Urdu, Yiddish*
 * code: Add a block of code to document (source,[type]) ***type** of optional*
 * pageBreak: Add a link break to document () ~ No arguments
 * title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*
