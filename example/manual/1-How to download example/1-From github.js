@@ -3,7 +3,7 @@
 //======================================== How to login
 //=====================================================
 
-function githubPage(createPage, { description, screenshot, typeText, click, title, youtube,  }){
+function githubPage(createPage, { description, screenshot, click, title }){
 
   createPage(() => {
           title(`From the github page`)

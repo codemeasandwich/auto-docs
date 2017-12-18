@@ -3,23 +3,36 @@
 [![npm version](https://badge.fury.io/js/auto-docs.svg)](https://www.npmjs.com/package/auto-docs)
 
 
-### install
+### Installing
 
 * npm install -g testcafe
 * npm install -g docsify-cli
 * npm install --save-dev auto-docs
 
-### in you package.json - scripts
+### In you package.json
 
-To generate
-```
-testcafe \"chrome --kiosk --incognito --force-device-scale-factor=1.5\" node_modules/auto-docs/ -s docs/pics
+```json
+
+  "scripts": {
+    "manual": "testcafe \"chrome:headless --kiosk --incognito --force-device-scale-factor=1.5\" node_modules/auto-docs/ -s docs/pics",
+    "files": "node node_modules/auto-docs/",
+    "serve": "docsify serve docs"
+  }
+
 ```
 
-To run document server
-```
-docsify serve docs
-```
+**To generate with screenshots** `npm run manual`
+
+also 
+
+**To run without [brower commands](#brower-commands) use** `npm run files`
+
+Once generated.
+
+**To run document server** `npm run serve`
+
+How you can open [localhost:3000](http://localhost:3000)
+
 
 # Api
 
@@ -38,8 +51,7 @@ docsify serve docs
 * lang: apply translation from ##.json `` lang`message` ``
     * Injects new text into language json file if new/missing
     * generating of language json file if missing
-    * With value passion recording
-        * language that use recording : *Arabic, Amharic, Arabic, Azerbaijani, Bangla, Burmese, Chinese, Galician, Georgian, Gujarati, Hindi, Japanese, Kannada, Kazakh, Korean, Kyrgyz, Latin, Malayalam, Marathi, Persian, Punjabi, Sindhi, Sinhala, Tamil, Telugu, Urdu, Yiddish*
+    * With value passion recording. Used in language like *Arabic, Chinese, Hindi, Japanese etc..*
 * code: Add a block of code to document (source,[type]) ***type** of optional*
 * pageBreak: Add a link break to document () ~ No arguments
 * title: Add a heading to document (text) or (level,text) *to set the depth of the sub heading*
@@ -111,7 +123,7 @@ window.$docsify = {
 
 </details>
 
-## config file
+## Config file
 
 From with the manual folder you should place a **config.json** file
 

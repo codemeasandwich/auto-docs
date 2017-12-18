@@ -1,7 +1,12 @@
-import { Selector } from 'testcafe';
-import { exec } from 'child_process';
+//import { Selector } from 'testcafe';
+
+const exec = require('child_process').exec
+const jsonStringify = require('json-pretty')
+const setup = require('./bootstrap')
+
+/*import { exec } from 'child_process';
 import jsonStringify from 'json-pretty';
-import setup from './bootstrap';
+import setup from './bootstrap';*/
 
 const _dirname = __dirname.split('/').slice(0,-3).join('/')
 const config = require(_dirname+'/manual/config.json');
@@ -41,7 +46,7 @@ for(const heading in deepFile){
 
 const helper = require("./helper")
 
-fixture`Started`.page``;
+global.test && fixture`Started`.page``;
 
 
 let mds = {}

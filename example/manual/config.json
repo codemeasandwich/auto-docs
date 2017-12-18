@@ -1,9 +1,10 @@
 {
-  "server":"https://github.com/codemeasandwich/",
+  "server":"http://localhost:3000/myapp/",
+  "only":["1-Welcome","1-How to log in"],
   "login":{
-    "user":["#loginusername", "admin"],
-    "pass":["#loginpassword", "pass"],
+    "user":["#username", "admin"],
+    "pass":["#password", "admin"],
     "url":"login.html",
-    "button":".card-content-login"
-  },
+    "button":"#loginButton"
+  }
 }
