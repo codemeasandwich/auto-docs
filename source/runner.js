@@ -128,7 +128,7 @@ groupArray.forEach(({ groupsName, groupName })=>{
 - ${groupName}`
   for(const pageName of groups[groupsName]){
   sidebarContent += `
-  - [${pageName.name}](${pageName.path})
+  - [${pageName.name}](${encodeURI(pageName.path)})
   `
   }
 })

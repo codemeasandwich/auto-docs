@@ -50,7 +50,7 @@ ${txt}
       })
       commands.push({
         type:"saveScreenshot", run:false, value:`
-![${name.replace(/_/g," ")}](pics/${name}.png)
+![${name.replace(/_/g," ")}](pics/${name})
 `
       })
       commands.push({
