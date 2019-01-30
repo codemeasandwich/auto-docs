@@ -1,4 +1,4 @@
-function cover(createPage, { description, img }){
+function cover(createPage, { description, img, title }){
 
   createPage(() => {
     img(`Person working at a desk`,`/pics/typing.jpg`)

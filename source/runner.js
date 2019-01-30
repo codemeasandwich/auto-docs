@@ -175,17 +175,19 @@ manualClean.forEach(async (page, index, {length}) =>{
 
 //console.log(" ++++ ",page)
   if(page.url){
-    let url = config.server + config.login.url, commands = page.commands
+    let url = config.server, commands = page.commands
 
-
-      if(page.url !== config.login.url){
-        const aHelper = new helper;
-        aHelper.typeText(config.login.user[0], config.login.user[1])
-        aHelper.typeText(config.login.pass[0], config.login.pass[1])
-        aHelper.click(config.login.button)
-        aHelper.navigateTo(page.url)
-        commands = aHelper._.commands.concat(commands)
-      }
+    if(config.login){
+      url = url + config.login.url
+          if(page.url !== config.login.url){
+            const aHelper = new helper;
+            aHelper.typeText(config.login.user[0], config.login.user[1])
+            aHelper.typeText(config.login.pass[0], config.login.pass[1])
+            aHelper.click(config.login.button)
+            aHelper.navigateTo(page.url)
+            commands = aHelper._.commands.concat(commands)
+          }
+    }
 
 
       test.page(url)(page.nav.pageName, async t => {

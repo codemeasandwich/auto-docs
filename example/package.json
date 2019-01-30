@@ -1,5 +1,5 @@
 {
-  "name": "auto-docs example",
+  "name": "auto-docs_example",
   "version": "1.0.0",
   "description": "An example of using auto-docs an a project",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "author": "Brian Shannon (https://www.npmjs.com/~codemeasandwich)",
   "dependencies": {
-    "auto-docs": "0.1.1",
+    "auto-docs": "^0.1.1",
     "docsify": "^4.5.5",
     "json-pretty": "0.0.1"
   }
